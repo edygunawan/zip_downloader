@@ -1,0 +1,23 @@
+{
+  "name": "zip-downloader",
+  "version": "0.0.1",
+  "description": "Javascript package to download files into zip",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edygunawan/zip_downloader.git"
+  },
+  "keywords": [
+    "download",
+    "zip"
+  ],
+  "author": "Edy Gunawan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edygunawan/zip_downloader/issues"
+  },
+  "homepage": "https://github.com/edygunawan/zip_downloader#readme"
+}
