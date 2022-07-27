@@ -1,5 +1,5 @@
 const JSZip = require("jszip");
-const JSZipUtils = require("./JsZipUtils");
+const JSZipUtils = require("./JSZipUtils");
 const fs = require("fs");
 
 var ZipUtils = {};

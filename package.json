@@ -1,5 +1,5 @@
 {
-  "name": "zip-downloader",
+  "name": "@fothoncode/zip-downloader",
   "version": "0.0.1",
   "description": "Javascript package to download files into zip",
   "main": "index.js",
