@@ -1,10 +1,10 @@
-import JSZip from "jszip";
-import { saveAs } from "file-saver";
-import JSZipUtils from './JsZipUtils';
+const JSZip = require("jszip");
+const JSZipUtils = require("./JsZipUtils");
+const fs = require("fs");
 
 var ZipUtils = {};
 
-ZipUtils.GetBinaryFile = (file) => new Promise((resolve, reject) => {
+ZipUtils.GetBinaryFileUrl = (file) => new Promise((resolve, reject) => {
     JSZipUtils.getBinaryContent(file, function (err, data) {
         if(err) {
             reject(err); 
@@ -13,17 +13,26 @@ ZipUtils.GetBinaryFile = (file) => new Promise((resolve, reject) => {
     });
 })
 
-ZipUtils.GenerateZip = async() => {
-    var zip = new JSZip();
-    for (const f of banyakFiles) {
-        const fileName = new URL(f).pathname.split('/').pop();
-        const data = await ZipUtils.GetBinaryFile(f)
-        zip.file(fileName, data, {binary:true});
+ZipUtils.GetBinaryFile = (filePath) => {
+    const buffer = fs.readFileSync(filePath);
+    return buffer;
+}
+
+ZipUtils.GenerateZip = async(files, returnType='blob') => {
+    try {
+        var zip = new JSZip();
+        for (const f of files) {
+            if(f.name && f.bin) {
+                zip.file(f.name, f.bin, {binary:true});
+            }     
+        }
+        
+        const content = await zip.generateAsync({type: returnType});
+        return content;
+    } catch (err) {
+        console.log(err);
+        return null;
     }
-    zip.generateAsync({type:"blob"})
-        .then(function(content) {
-        saveAs(content, `test-${new Date().getTime()}.zip`);
-        });
 }
 
 module.exports = ZipUtils;
